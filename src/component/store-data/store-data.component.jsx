@@ -3,8 +3,8 @@ import React from 'react'
 import { emailRegex } from '../regEx/Regex';
 
 class StoreData extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={          
             name:"",
             email:"",
@@ -34,7 +34,7 @@ class StoreData extends React.Component{
         let isValid = true;
         const errors= {};
 
-        if(name.includes("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")){
+        if(name.includes(`^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$`)){
             errors.wrongInput="Wrong input";
             isValid=false;
         }
@@ -51,8 +51,9 @@ class StoreData extends React.Component{
     }
 
     handleSubmit=(e) =>{
-        this.state(e.target.value)
-        //e.preventDefault();
+        e.preventDefault();
+        this.setState({email:e.target.value})
+        
         // const {name,email, password } = this.state
         // console.log({name: name.value, email: email.value, password: password.value })
         this.validatingForm();
@@ -77,6 +78,7 @@ class StoreData extends React.Component{
 
 
     render(){
+       // console.log(this.state)
         return(
             <>
             <div className='field'>
@@ -91,10 +93,10 @@ class StoreData extends React.Component{
                 <br></br>
                 <label><b>Password: </b></label>
                 <input type="Password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}/><br></br>
-                <input type="button" name='button' value="Log In Here"></input>
+                <input type="button" name='button' value="Log In Here" onClick={this.handleSubmit}/>
                 <br></br> 
                 {Object.keys(this.state.errors).map((key) =>{
-                    return <div key={key}>{this.errors[key]}</div>
+                    return <div style={{color:"red"}} key={key}>{this.state.errors[key]}</div>
                 })}
             </form>
 
