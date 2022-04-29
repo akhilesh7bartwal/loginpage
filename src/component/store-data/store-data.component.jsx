@@ -52,11 +52,11 @@ class StoreData extends React.Component{
 
     handleSubmit=(e) =>{
         e.preventDefault();
-        this.setState({email:e.target.value})
         
         // const {name,email, password } = this.state
         // console.log({name: name.value, email: email.value, password: password.value })
         this.validatingForm();
+        console.log("submitted")
     }
 
     // onHandleEvent = (event) => {
